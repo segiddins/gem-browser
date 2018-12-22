@@ -50,11 +50,12 @@ def fetch_gem_content(full_name)
   Net::HTTP.get(url).freeze
 end
 
-get '/gems/:full_name' do |full_name|
-  redirect "/gems/#{full_name}/"
+get '/gems/:name/versions/:version' do |name, version|
+  redirect "/gems/#{name}/versions/#{version}/"
 end
 
-get '/gems/:full_name/*?' do |full_name, path|
+get '/gems/:name/versions/:version/*?' do |name, version, path|
+  full_name = "#{name}-#{version}"
   s = fetch_gem_content(full_name)
   package = Package.from_string(s)
   path.chomp!('/')
@@ -67,7 +68,7 @@ get '/gems/:full_name/*?' do |full_name, path|
 
     content_type 'text/html'
     '<ul>' +
-      content.sort.map { |l| "<li><a href='/gems/#{full_name}/#{path}/#{l}'>#{l}</a></li>" }.join +
+      content.sort.map { |l| "<li><a href='/gems/#{name}/versions/#{version}/#{path}/#{l}'>#{l}</a></li>" }.join +
       '</ul>'
   when String
     return content if params['raw']
@@ -79,9 +80,9 @@ get '/gems/:full_name/*?' do |full_name, path|
       </head>
       <body>
         <h3>
-          <a href='/gems/#{full_name}/#{File.dirname path}'>#{File.dirname path}</a>
+          <a href='/gems/#{name}/versions/#{version}/#{File.dirname path}'>#{File.dirname path}</a>
           /
-          <a href='/gems/#{full_name}/#{path}'>#{File.basename path}</a>
+          <a href='/gems/#{name}/versions/#{version}/#{path}'>#{File.basename path}</a>
         </h3>
         #{html_highlight(source: content, filename: path)}
       </body>
@@ -89,7 +90,8 @@ get '/gems/:full_name/*?' do |full_name, path|
   end
 end
 
-get '/gemspecs/:full_name' do |full_name|
+get '/gemspecs/:name/versions/:version' do |name, version|
+  full_name = "#{name}-#{version}"
   url = URI "https://rubygems.org/quick/Marshal.#{Gem.marshal_version}/#{full_name}.gemspec.rz"
   rz = Net::HTTP.get(url)
   marshal = Gem::Util.inflate rz
@@ -105,7 +107,7 @@ get '/gemspecs/:full_name' do |full_name|
       <link rel='stylesheet' type='text/css' href='/highlight.css'>
     </head>
     <body>
-      <h3><a href='/gems/#{full_name}/'>#{spec.full_name}</a></h3>
+      <h3><a href='/gems/#{name}/versions/#{version}/'>#{spec.full_name}</a></h3>
       #{html_highlight(source: ruby, filename: spec.spec_name)}
     </body>
   HTML
@@ -126,9 +128,9 @@ get '/' do
 
       <p>For example, to browse <a href="https://rubygems.org/gems/bundler/versions/1.17.2">Bundler 1.17.2</a>:</p>
 
-      <p><a href="/gems/bundler-1.17.2">You can browse the contents of the gem</a><br/>
+      <p><a href="/gems/bundler/versions/1.17.2/">You can browse the contents of the gem</a><br/>
 
-      <a href="/gemspecs/bundler-1.17.2">as well as the gemspec!</a></p>
+      <a href="/gemspecs/bundler/versions/1.17.2">as well as the gemspec!</a></p>
     </body>
   HTML
 end
