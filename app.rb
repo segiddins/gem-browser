@@ -131,6 +131,8 @@ get '/' do
       <p><a href="/gems/bundler/versions/1.17.2/">You can browse the contents of the gem</a><br/>
 
       <a href="/gemspecs/bundler/versions/1.17.2">as well as the gemspec!</a></p>
+
+      <p><a href="https://github.com/segiddins/gem-browser">Contribute on GitHub</a></p>
     </body>
   HTML
 end
