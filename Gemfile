@@ -1,7 +1,10 @@
-ruby File.read(File.expand_path(".ruby-version", __dir__)).strip
+# frozen_string_literal: true
+
+ruby File.read(File.expand_path('.ruby-version', __dir__)).strip
 
 source 'https://rubygems.org' do
-  gem 'sinatra', '2.0.4'
   gem 'rouge', '~> 3.3'
-end
+  gem 'sinatra', '2.0.4'
 
+  gem 'rubocop', '~> 0.61.1', group: :development
+end
