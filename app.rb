@@ -77,6 +77,7 @@ get '/gems/:name/versions/:version/*?' do |name, version, path|
     <<~HTML
       <head>
         <link rel='stylesheet' type='text/css' href='/highlight.css'>
+        <link rel='stylesheet' type='text/css' href='/application.css'>
       </head>
       <body>
         <h3>
@@ -105,6 +106,7 @@ get '/gemspecs/:name/versions/:version' do |name, version|
   <<~HTML
     <head>
       <link rel='stylesheet' type='text/css' href='/highlight.css'>
+      <link rel='stylesheet' type='text/css' href='/application.css'>
     </head>
     <body>
       <h3><a href='/gems/#{name}/versions/#{version}/'>#{spec.full_name}</a></h3>
@@ -116,6 +118,15 @@ end
 get '/highlight.css' do
   content_type 'text/css'
   Rouge::Theme.find('github').render(scope: '.highlight')
+end
+
+get '/application.css' do
+  content_type 'text/css'
+  <<~CSS
+    .highlight {
+      overflow-x: scroll;
+    }
+  CSS
 end
 
 get '/' do
