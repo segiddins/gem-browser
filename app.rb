@@ -16,7 +16,8 @@ class Package < Gem::Package
   end
 
   def at_path(path)
-#    verify unless @spec
+    verify unless @spec
+
     by_dir = {}
     @gem.with_read_io do |io|
       gem_tar = Gem::Package::TarReader.new io
