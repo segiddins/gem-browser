@@ -47,6 +47,10 @@ def fetch_gem_content(full_name)
   Net::HTTP.get(url).freeze
 end
 
+get "/gems/:full_name" do |full_name|
+  redirect "/gems/#{full_name}/"
+end
+
 get "/gems/:full_name/*?" do |full_name, path|
   s = fetch_gem_content(full_name)
   package = Package.from_string(s)
