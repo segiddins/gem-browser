@@ -67,9 +67,9 @@ get '/gems/:name/versions/:version/*?' do |name, version, path|
     return content.sort.join("\n") if params['raw']
 
     content_type 'text/html'
-    '<ul>' +
-      content.sort.map { |l| "<li><a href='/gems/#{name}/versions/#{version}/#{path}/#{l}'>#{l}</a></li>" }.join +
-      '</ul>'
+    "<ul>\n" +
+      content.sort.map { |l| "  <li><a href='/gems/#{name}/versions/#{version}/#{path}/#{l}'>#{l}</a></li>\n" }.join +
+      "</ul>\n"
   when String
     return content if params['raw']
 
