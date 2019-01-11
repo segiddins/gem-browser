@@ -7,6 +7,7 @@ source 'https://rubygems.org' do
   gem 'sinatra', '2.0.5'
 
   group :development do
+    gem 'rack-test'
     gem 'rake', '~> 12.3'
     gem 'rspec'
     gem 'rubocop', '~> 0.62.0'
