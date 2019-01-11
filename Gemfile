@@ -6,5 +6,9 @@ source 'https://rubygems.org' do
   gem 'rouge', '~> 3.3'
   gem 'sinatra', '2.0.5'
 
-  gem 'rubocop', '~> 0.62.0', group: :development
+  group :development do
+    gem 'rake', '~> 12.3'
+    gem 'rspec'
+    gem 'rubocop', '~> 0.62.0'
+  end
 end
