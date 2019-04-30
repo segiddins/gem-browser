@@ -10,6 +10,6 @@ source 'https://rubygems.org' do
     gem 'rack-test'
     gem 'rake', '~> 12.3'
     gem 'rspec'
-    gem 'rubocop', '~> 0.64.0'
+    gem 'rubocop', '~> 0.68.0'
   end
 end
