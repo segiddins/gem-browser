@@ -4,7 +4,7 @@ ruby File.read(File.expand_path('.ruby-version', __dir__)).strip
 
 source 'https://rubygems.org' do
   gem 'rouge', '~> 3.11'
-  gem 'sinatra', '2.0.5'
+  gem 'sinatra', '2.0.7'
 
   group :development do
     gem 'rack-test'
