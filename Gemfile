@@ -8,7 +8,7 @@ source 'https://rubygems.org' do
 
   group :development do
     gem 'rack-test'
-    gem 'rake', '~> 12.3'
+    gem 'rake', '~> 13.0'
     gem 'rspec'
     gem 'rubocop', '~> 0.71.0'
   end
