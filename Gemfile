@@ -3,7 +3,7 @@
 ruby File.read(File.expand_path('.ruby-version', __dir__)).strip
 
 source 'https://rubygems.org' do
-  gem 'rouge', '~> 3.26'
+  gem 'rouge', '~> 3.29'
   gem 'sinatra', '2.1.0'
 
   group :development do
